@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Tarea_jetpack_compose_pmpm</string>
+    <string name="whatsApp">WhatsApp</string>
+    <string name="contacto_1">Jose</string>
+    <string name="contacto_2">Laura</string>
+    <string name="contacto_3">Fran</string>
+    <string name="contacto_4">María</string>
+    <string name="contacto_5">Fernando</string>
+    <string name="contacto_6">Lola</string>
+    <string name="contacto_7">Andrés</string>
+    <string name="contacto_8">Luis</string>
+    <string name="contacto_9">Rosa</string>
+    <string name="contacto_10">Iván</string>
+    <string name="contacto_11">Alberto</string>
+    <string name="contacto_12">Miguel</string>
+    <string name="contacto_13">Isabel</string>
+    <string name="contacto_14">Daniel</string>
+    <string name="contacto_15">Ana</string>
+    <string name="contacto_16">Hugo</string>
+    <string name="contacto_17">2ºDAM</string>
+</resources>
