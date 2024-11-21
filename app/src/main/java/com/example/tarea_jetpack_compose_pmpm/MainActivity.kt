@@ -12,7 +12,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.tarea_jetpack_compose_pmpm.ui.theme.MyWhatsApp
+import com.example.tarea_jetpack_compose_pmpm.navigation.AppNavigation
 import com.example.tarea_jetpack_compose_pmpm.ui.theme.Tarea_jetpack_compose_pmpmTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Tarea_jetpack_compose_pmpmTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MyWhatsApp(
+                    AppNavigation(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     Tarea_jetpack_compose_pmpmTheme {
-        MyWhatsApp(modifier = Modifier)
+        AppNavigation(modifier = Modifier)
     }
 }
 

@@ -1,4 +1,4 @@
-package com.example.tarea_jetpack_compose_pmpm.ui.theme
+package com.example.tarea_jetpack_compose_pmpm.layout.main
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,20 +10,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Call
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -38,13 +30,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.tarea_jetpack_compose_pmpm.R
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun MyWhatsApp(modifier: Modifier) {
+fun MyWhatsApp(modifier: Modifier, navController: NavController) {
+    // Le pasamos el contexto de nuestra app local para que pueda acceder al archivo
     val listaContacto = cargarContactos(LocalContext.current)
 
     Box(
@@ -90,99 +82,18 @@ fun MyWhatsApp(modifier: Modifier) {
                     tint = Color.White
                 )
             }
-            HorizontalDivider(
-                modifier = Modifier.fillMaxWidth(),
-                thickness = 1.dp,
-                color = Color.Gray
-            )
-            MyLazyColumn(listaContacto)
+            DivisorHorizontal(3)
+            MyContactos(listaContacto, navController)
 
         }
 
         MyFooter(modifier = Modifier
             .fillMaxWidth()
-            .height(40.dp)
             .align(Alignment.BottomCenter)
         )
     }
-
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
-@Composable
-fun Contacto(nameResource: Int) {
-    val currentTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
-    Row(modifier = Modifier
-        .fillMaxWidth()
-        .height(60.dp),
-        verticalAlignment = Alignment.CenterVertically) {
-        Icon(imageVector = Icons.Default.Person,
-            tint = Color.White,
-            contentDescription = "Contacto",
-            modifier = Modifier.weight(0.2f))
-        Spacer(modifier = Modifier.weight(0.1f))
-        Text(text = stringResource(id=nameResource),
-            modifier = Modifier.weight(1f),
-            color =  Color.White,
-            fontWeight = FontWeight.Bold
-        )
-        Spacer(modifier = Modifier.weight(0.1f))
-        Text(
-            text = currentTime,
-            fontSize = 12.sp,
-            modifier = Modifier.padding(end = 20.dp),
-            color = Color.Gray,
-        )
-    }
-}
-
-@RequiresApi(Build.VERSION_CODES.O)
-@Composable
-fun MyLazyColumn(contactos: MutableList<Int>) {
-    LazyColumn(modifier = Modifier
-        .fillMaxSize()
-        .padding(bottom = 40.dp)) {
-        items(contactos) { id ->
-            Contacto(nameResource = id)
-        }
-    }
-}
-
-@Composable
-fun MyFooter(modifier: Modifier) {
-    Column(modifier = modifier.height(30.dp)) {
-        HorizontalDivider(
-            modifier = Modifier.fillMaxWidth(),
-            thickness = 1.dp,
-            color = Color.Gray
-        )
-        Row(modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ){
-            Icon(imageVector = Icons.Default.Email,
-                contentDescription = "chats",
-                modifier = Modifier.weight(0.2f),
-                tint = Color.White
-            )
-            Icon(imageVector = Icons.Default.Info,
-                contentDescription = "novedades",
-                modifier = Modifier.weight(0.2f),
-                tint = Color.White
-            )
-            Icon(imageVector = Icons.Default.Face,
-                contentDescription = "comunidades",
-                modifier = Modifier.weight(0.2f),
-                tint = Color.White
-            )
-            Icon(imageVector = Icons.Default.Call,
-                contentDescription = "comunidades",
-                modifier = Modifier.weight(0.2f),
-                tint = Color.White
-            )
-        }
-    }
-}
 
 @SuppressLint("DiscouragedApi")
 fun cargarContactos(context: Context): MutableList<Int> {
@@ -191,11 +102,11 @@ fun cargarContactos(context: Context): MutableList<Int> {
     val packageName = context.packageName
 
     // Obtener todos los recursos 'string' que empiezan con "contacto_"
-    // No hay una forma directa de obtener todos los recursos sin conocer su nombre, así que probamos un rango.
+    // Bucle para recorrer nuestro recursos que tienen asignado un nombre.
     var index = 1
     while (true) {
         val resourceName = "contacto_$index"  // Nombre de recurso esperado: contacto_1, contacto_2, etc.
-        val resourceId = resources.getIdentifier(resourceName, "string", packageName)
+        val resourceId = resources.getIdentifier(resourceName, "string", packageName) // ID del recurso
 
         // Si el recurso no existe, salimos del bucle
         if (resourceId == 0) break
@@ -205,4 +116,14 @@ fun cargarContactos(context: Context): MutableList<Int> {
     }
 
     return listaContactos
+}
+
+
+@Composable
+fun DivisorHorizontal(grosor: Int) {
+    HorizontalDivider(
+        modifier = Modifier.fillMaxWidth(),
+        thickness = grosor.dp,
+        color = Color.Gray
+    )
 }
