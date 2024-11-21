@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -76,10 +75,9 @@ fun Contacto(nameResource: Int, navController: NavController) {
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun MyContactos(contactos: MutableList<Int>, navController: NavController) {
-    LazyColumn(modifier = Modifier
-        .fillMaxSize()
-        .padding(bottom = 40.dp))
+fun MyContactos(modifier: Modifier, contactos: MutableList<Int>, navController: NavController) {
+    LazyColumn(modifier = modifier
+    )
     {
         items(contactos) { id ->
             Contacto(nameResource = id, navController)

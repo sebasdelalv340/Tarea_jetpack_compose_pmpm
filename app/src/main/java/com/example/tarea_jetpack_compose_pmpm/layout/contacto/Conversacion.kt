@@ -40,7 +40,7 @@ fun Conversacion(nameResource: Int, alignment: Alignment.Horizontal) {
     )
     {
         Box(modifier = Modifier
-            .background(color = if (alignment == Alignment.Start) Color.DarkGray else Color( 0xFF2D7C3F), shape = RoundedCornerShape(8.dp))
+            .background(color = if (alignment == Alignment.Start) Color.DarkGray else Color( 0xFF2D7C3F), shape = RoundedCornerShape(10.dp))
             .padding(horizontal = 10.dp, vertical = 2.dp)
 
         ) {
@@ -66,10 +66,8 @@ fun Conversacion(nameResource: Int, alignment: Alignment.Horizontal) {
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun MyConversacion(conversacion: MutableList<Int>) {
-    LazyColumn(modifier = Modifier
-        .fillMaxSize()
-        .padding(bottom = 40.dp))
+fun MyConversacion(modifier: Modifier, conversacion: MutableList<Int>) {
+    LazyColumn(modifier = modifier)
     {
         itemsIndexed(conversacion) { index, id ->
             val alignment = if (index % 2 == 0) Alignment.Start else Alignment.End

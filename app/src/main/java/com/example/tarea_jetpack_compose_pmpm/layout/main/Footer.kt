@@ -20,7 +20,7 @@ fun MyFooter(modifier: Modifier) {
     Column(modifier = modifier) {
         DivisorHorizontal(3)
         Row(modifier = Modifier.fillMaxWidth()
-            .height(40.dp),
+            .height(50.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceAround
         ){
